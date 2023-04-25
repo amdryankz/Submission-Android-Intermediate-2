@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="password">Password</string>
+    <string name="email_taken">Email sudah dipakai</string>
+    <string name="timeout">Timeout!! silakan coba lagi nanti</string>
+    <string name="error_message">"Error message : "</string>
+    <string name="success_login">Berhasil masuk</string>
+    <string name="unauthorized">Mohon periksa email atau password dengan benar</string>
+    <string name="or_sign_in">atau Daftar</string>
+    <string name="logout">Keluar</string>
+    <string name="nama">Nama</string>
+    <string name="description">Deskripsi</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="photo">foto</string>
+    <string name="input_picture">Mohon masukkan gambar</string>
+    <string name="input_des">Mohon masukkan deskripsi</string>
+    <string name="choose_picture">Pilih gambar</string>
+    <string name="package_name">com.example.mystoryapp</string>
+    <string name="message">"Message : "</string>
+    <string name="add_story">Tambah cerita</string>
+    <string name="input_email">Mohon masukkan email anda</string>
+    <string name="invalid_email">Email tidak valid</string>
+    <string name="input_pass">Mohon masukkan password anda</string>
+    <string name="pass_length">Password harus minimal 8 karakter</string>
+    <string name="input_name">Mohon masukkan nama anda</string>
+    <string name="user_create">User dibuat</string>
+    <string name="email">Email</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="no_data">TIDAK ADA DATA</string>
+    <string name="detail_title">Story %1$s</string>
+    <string name="change_language">Ganti Bahasa</string>
+</resources>

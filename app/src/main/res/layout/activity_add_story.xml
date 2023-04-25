@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddStoryActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_photo"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:layout_margin="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_image_24"
+            android:contentDescription="@string/photo" />
+
+        <Button
+            android:id="@+id/button_camera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/camera"
+            app:layout_constraintEnd_toStartOf="@+id/button_gallery"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_photo" />
+
+        <Button
+            android:id="@+id/button_gallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="70dp"
+            android:text="@string/gallery"
+            app:layout_constraintBottom_toBottomOf="@+id/button_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_camera"
+            app:layout_constraintTop_toTopOf="@+id/button_camera" />
+
+        <EditText
+            android:id="@+id/ed_add_description"
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="18dp"
+            android:autofillHints="Description"
+            android:background="@drawable/border"
+            android:gravity="top|left"
+            android:hint="@string/description"
+            android:inputType="textMultiLine"
+            android:maxWidth="360dp"
+            android:maxHeight="180dp"
+            android:maxLines="8"
+            android:padding="15dp"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_camera"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/upload"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_add_description"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
