@@ -1,6 +1,8 @@
 package com.example.mystoryapp.retrofit
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -61,6 +63,12 @@ data class ListStoryResponse(
     @field:SerializedName("photoUrl")
     val photoUrl: String,
 
+    @field:SerializedName("lat")
+    val lat: Double? = null,
+
+    @field:SerializedName("lon")
+    val lon: Double? = null,
+
     @field:SerializedName("id")
     val id: String,
 
@@ -69,10 +77,42 @@ data class ListStoryResponse(
 
     @field:SerializedName("createdAt")
     val createdAt: String,
+) : Parcelable
+
+data class StoryResponseItem(
+    @field:SerializedName("error")
+    var error: Boolean,
+
+    @field:SerializedName("message")
+    var message: String? = null,
+
+    @field:SerializedName("listStory")
+    var listStory: List<ListStoryPagingResponse>? = null
+)
+
+@Parcelize
+@Entity(tableName = "story")
+data class ListStoryPagingResponse(
+
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("photoUrl")
+    val photoUrl: String,
 
     @field:SerializedName("lat")
-    val lat: Double,
+    val lat: Double? = null,
 
     @field:SerializedName("lon")
-    val lon: Double,
+    val lon: Double? = null,
+
+    @field:SerializedName("description")
+    val description: String,
+
+    @field:SerializedName("createdAt")
+    val createdAt: String,
 ) : Parcelable

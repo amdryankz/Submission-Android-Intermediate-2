@@ -35,6 +35,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_detail_photo" />
 
+        <ImageView
+            android:id="@+id/loc_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingStart="13dp"
+            android:src="@drawable/baseline_location_on_24"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_location"
+            android:contentDescription="@string/photo"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:paddingTop="14dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/loc_mark"
+            app:layout_constraintStart_toEndOf="@id/loc_mark"
+            app:layout_constraintBottom_toBottomOf="@id/loc_mark"
+            android:text="@string/no_location" />
+
         <TextView
             android:id="@+id/tv_detail_description"
             android:layout_width="match_parent"
@@ -47,6 +73,6 @@
             android:text="@string/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
+            app:layout_constraintTop_toBottomOf="@+id/loc_mark" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

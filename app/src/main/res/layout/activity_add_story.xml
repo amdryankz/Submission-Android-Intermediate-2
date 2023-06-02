@@ -46,7 +46,7 @@
 
         <EditText
             android:id="@+id/ed_add_description"
-            android:layout_width="360dp"
+            android:layout_width="340dp"
             android:layout_height="200dp"
             android:layout_marginTop="18dp"
             android:autofillHints="Description"
@@ -64,6 +64,19 @@
             app:layout_constraintTop_toBottomOf="@id/button_camera"
             tools:ignore="RtlHardcoded" />
 
+        <Switch
+            android:id="@+id/switch_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use current location"
+            android:layout_marginTop="18dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/button_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_add_description"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
         <Button
             android:id="@+id/button_add"
             android:layout_width="0dp"
@@ -73,7 +86,7 @@
             android:layout_marginTop="18dp"
             android:text="@string/upload"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ed_add_description"
+            app:layout_constraintTop_toBottomOf="@id/switch_location"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar

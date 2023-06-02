@@ -1,13 +1,13 @@
 package com.example.mystoryapp.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,13 +16,15 @@ import com.example.mystoryapp.AppPreferences
 import com.example.mystoryapp.R
 import com.example.mystoryapp.databinding.ActivityStoryBinding
 import com.example.mystoryapp.databinding.ItemListStoryBinding
-import com.example.mystoryapp.retrofit.ListStoryResponse
+import com.example.mystoryapp.retrofit.ListStoryPagingResponse
 
 class StoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
     private lateinit var binding1: ItemListStoryBinding
-    private val storyViewModel by viewModels<StoryViewModel>()
+    private val storyViewModel: StoryViewModel by viewModels {
+        ViewModelFactory(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +43,11 @@ class StoryActivity : AppCompatActivity() {
             showLoading(it)
         }
 
-        storyViewModel.message.observe(this) {
-            getStoryUser(storyViewModel.story)
-        }
-
         val appPreferences = AppPreferences(this)
         val token = appPreferences.authToken
 
         if (token != null) {
-            storyViewModel.getStories(token)
+            getStoryUser(token)
         }
 
         binding.fab.setOnClickListener {
@@ -78,6 +76,11 @@ class StoryActivity : AppCompatActivity() {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
+            R.id.maps_menu -> {
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> true
         }
     }
@@ -86,40 +89,31 @@ class StoryActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun showNoData(isNoData: Boolean) {
-        binding.noData.visibility = if (isNoData) View.VISIBLE else View.GONE
-    }
+    private fun getStoryUser(token: String) {
+        val listUserAdapter = ListStoryAdapter(this)
+        binding.rvStory.adapter = listUserAdapter
 
-    override fun onResume() {
-        super.onResume()
-        val appPreferences = AppPreferences(this)
-        val token = appPreferences.authToken
-
-        if (token != null) {
-            storyViewModel.getStories(token)
+        storyViewModel.getStory(token).observe(this) {
+            listUserAdapter.submitData(lifecycle, it)
         }
-    }
 
-    private fun getStoryUser(story: List<ListStoryResponse>) {
-        if (story.isEmpty()) {
-            showNoData(true)
-        } else {
-            showNoData(false)
-            val listUserAdapter = ListStoryAdapter(story)
-            binding.rvStory.adapter = listUserAdapter
-
-            listUserAdapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: ListStoryResponse) {
-                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@StoryActivity,
-                        androidx.core.util.Pair.create(binding1.tvItemName, ViewCompat.getTransitionName(binding1.tvItemName)),
-                        androidx.core.util.Pair.create(binding1.image, ViewCompat.getTransitionName(binding1.image))
+        listUserAdapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: ListStoryPagingResponse) {
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@StoryActivity,
+                    androidx.core.util.Pair.create(
+                        binding1.tvItemName,
+                        ViewCompat.getTransitionName(binding1.tvItemName)
+                    ),
+                    androidx.core.util.Pair.create(
+                        binding1.image,
+                        ViewCompat.getTransitionName(binding1.image)
                     )
-                    val intent = Intent(this@StoryActivity, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_STORY, data)
-                    startActivity(intent, options.toBundle())
-                }
-            })
-        }
+                )
+                val intent = Intent(this@StoryActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_STORY, data)
+                startActivity(intent, options.toBundle())
+            }
+        })
     }
 }

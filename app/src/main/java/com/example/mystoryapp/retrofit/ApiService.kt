@@ -21,7 +21,7 @@ interface ApiService {
         @Field("password") password: String
     ) : Call<LoginResponse>
 
-    @GET("stories")
+    @GET("stories?location=1")
     fun getStories(@Header("Authorization") token: String) : Call<StoryResponse>
 
     @Multipart
@@ -29,6 +29,16 @@ interface ApiService {
     fun addStoryUser(
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
+        @Part("lat") lat: Float?,
+        @Part("lon") lon: Float?,
         @Header("Authorization") token: String
     ) : Call<AddStoryResponse>
+
+    @GET("stories")
+    suspend fun getPagingStories(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("location") location: Int,
+        @Header("Authorization") token: String
+    ) : StoryResponseItem
 }

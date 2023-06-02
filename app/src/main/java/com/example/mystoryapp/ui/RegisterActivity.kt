@@ -1,11 +1,11 @@
 package com.example.mystoryapp.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mystoryapp.R
 import com.example.mystoryapp.databinding.ActivityRegisterBinding
 

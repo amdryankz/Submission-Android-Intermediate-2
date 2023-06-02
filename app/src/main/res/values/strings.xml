@@ -34,4 +34,10 @@
     <string name="no_data">NO DATA</string>
     <string name="detail_title">%1$s\'s Story</string>
     <string name="change_language">Change Language</string>
+    <string name="maps_api_key" translatable="false">AIzaSyDEto3JB92B5RQGTeYPVxV4RqgaLVXQejg</string>
+    <string name="maps" translatable="false">Maps</string>
+    <string name="location">Location</string>
+    <string name="no_location">No Location</string>
+    <string name="location_name_unknown">Location name unknown</string>
+    <string name="addresss">No Address</string>
 </resources>

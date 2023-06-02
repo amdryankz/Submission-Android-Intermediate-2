@@ -18,9 +18,9 @@ class AddStoryViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun addStoryUser(photo: MultipartBody.Part, desc: RequestBody, token: String) {
+    fun addStoryUser(photo: MultipartBody.Part, desc: RequestBody, token: String, lat: Double?, lon: Double?) {
         _isLoading.value = true
-        val service = ApiConfig.getApiService().addStoryUser(photo, desc, "Bearer $token")
+        val service = ApiConfig.getApiService().addStoryUser(photo, desc, lat?.toFloat(), lon?.toFloat(),"Bearer $token")
         service.enqueue(object : Callback<AddStoryResponse> {
             override fun onResponse(
                 call: Call<AddStoryResponse>,

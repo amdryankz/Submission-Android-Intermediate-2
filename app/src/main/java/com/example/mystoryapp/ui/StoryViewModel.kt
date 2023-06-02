@@ -1,16 +1,22 @@
 package com.example.mystoryapp.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.content.Context
+import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.mystoryapp.data.StoryRepository
+import com.example.mystoryapp.di.Injection
 import com.example.mystoryapp.retrofit.ApiConfig
+import com.example.mystoryapp.retrofit.ListStoryPagingResponse
 import com.example.mystoryapp.retrofit.ListStoryResponse
 import com.example.mystoryapp.retrofit.StoryResponse
 import retrofit2.Call
 import retrofit2.Response
 
-class StoryViewModel : ViewModel() {
-    var story: List<ListStoryResponse> = listOf()
+class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel() {
+    var story: List<ListStoryPagingResponse> = listOf()
+
+    var storyy: List<ListStoryResponse> = listOf()
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
@@ -19,6 +25,10 @@ class StoryViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     var isError: Boolean = false
+
+    fun getStory(token: String): LiveData<PagingData<ListStoryPagingResponse>> {
+        return storyRepository.getStory(token).cachedIn(viewModelScope)
+    }
 
     fun getStories(token: String) {
         _isLoading.value = true
@@ -30,7 +40,7 @@ class StoryViewModel : ViewModel() {
                     isError = false
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        story = responseBody.listStory
+                        storyy = responseBody.listStory
                     }
                     _message.value = responseBody?.message.toString()
 
@@ -46,5 +56,15 @@ class StoryViewModel : ViewModel() {
                 _message.value = t.message.toString()
             }
         })
+    }
+}
+
+class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(StoryViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return StoryViewModel(Injection.provideRepository(context)) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

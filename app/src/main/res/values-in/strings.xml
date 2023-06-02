@@ -34,4 +34,8 @@
     <string name="no_data">TIDAK ADA DATA</string>
     <string name="detail_title">Story %1$s</string>
     <string name="change_language">Ganti Bahasa</string>
+    <string name="location">Lokasi</string>
+    <string name="no_location">Lokasi tidak tersedia</string>
+    <string name="location_name_unknown">Nama lokasi tidak diketahui</string>
+    <string name="addresss">Alamat tidak tersedia</string>
 </resources>

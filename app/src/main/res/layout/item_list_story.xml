@@ -36,11 +36,35 @@
             android:layout_height="250dp"
             android:scaleType="centerCrop"
             android:transitionName="name"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/loc_mark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_item_name"
             tools:src="@tools:sample/avatars"
             android:contentDescription="@string/photo" />
+
+        <ImageView
+            android:id="@+id/loc_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:src="@drawable/baseline_location_on_24"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintEnd_toStartOf="@id/tv_location"
+            android:contentDescription="@string/photo" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:paddingTop="14dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/loc_mark"
+            app:layout_constraintStart_toEndOf="@id/loc_mark"
+            app:layout_constraintBottom_toBottomOf="@id/loc_mark"
+            android:text="@string/location" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
